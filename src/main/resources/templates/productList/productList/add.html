@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" style="max-width:600px;" th:object="${productList}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label th:for="productClass">Product Class</label>
+        <input class="form-control" th:field="*{productClass}" />
+        <span th:errors="*{productClass}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="vendor">Vendor</label>
+        <input class="form-control" th:field="*{vendor}" />
+        <span th:errors="*{vendor}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="vendorProductNum">Vendor Product #</label>
+        <input class="form-control" th:field="*{vendorProductNum}" />
+        <span th:errors="*{vendorProductNum}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="purchaseUnitMesure">Purchase Unit Mesure</label>
+        <input class="form-control" th:field="*{purchaseUnitMesure}" />
+        <span th:errors="*{purchaseUnitMesure}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="costPerPurchaseUofM">Cost per Purchase U of M</label>
+        <input class="form-control" th:field="*{costPerPurchaseUofM}" />
+        <span th:errors="*{costPerPurchaseUofM}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label th:for="type">Type</label>
+        <select name="id">
+            <option th:each="productClass : ${categories}"
+                    th:text="${category.name}"
+                    th:value="${category.id}"></option>
+        </select>
+    </div>
+
+    <input type="submit" value="Add Cheese" />
+</form>
+
+</body>
+</html>
