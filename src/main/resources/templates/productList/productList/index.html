@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${productList} ">no products :(</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Item #</th>
+        <th>Product Class</th>
+        <th>Vendor</th>
+        <th>Vendor Product #</th>
+        <th>Name</th>
+        <th>Unit of Measure</th>
+        <th>Purchase Unit of Measure</th>
+        <th>Cost per Purchase UofM</th>
+
+    </tr>
+
+    <tr th:each="product : ${productList}">
+        <td th:text="${productList.id}"></td>
+        <td th:text="${productList.productClass.name}"></td>
+        <td th:text="${productList.vendor}"></td>
+        <td th:text="${productList.vendorProductNum}"></td>
+        <td th:text="${productList.name}"></td>
+        <td th:text="${productList.purchaseUnitMesure}"></td>
+        <td th:text="${productList.costPerPurchaseUofM}"></td>
+
+    </tr>
+
+</table>
+
+
+<nav th:replace="fragments :: navigation"></nav>
+
+</body>
+</html>
