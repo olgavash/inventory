@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title th:text="${title}">Product List</title>
+    <title th:text="${title}">Cafeteria Inventory</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -12,16 +12,11 @@
 
 <nav th:fragment="navigation">
 
-    <a href="/productList">Product List</a> |
-    <a href="/countSheet">Count Sheet</a>
-    <a href="/productClass">Product Class</a>
+    <a href="/product">Product list</a> |
+    <a href="/countSheet">Update Count Sheet</a>
 
     <br/>
     <br/>
-</nav>
-
-<nav th:fragment="productListnavigation">
-    <a href="/productList/add">Add</a> |
 </nav>
 
 </body>

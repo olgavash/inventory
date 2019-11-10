@@ -1,14 +1,11 @@
 package com.inventory.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class ProductList {
+public class Product {
 
     @Id
     @GeneratedValue
@@ -25,27 +22,26 @@ public class ProductList {
     private String name;
 
     @NotNull
-    private String purchaseUnitMesure;
+    private String purchaseUnitMeasure;
 
     @NotNull
     private float costPerPurchaseUofM;
 
     @ManyToOne
-    private ProductClass aClass;
+    private ProductClass productClass;
 
-    public ProductList(String vendor, String vendorProductNum,
-                       String name, String purchaseUnitMesure, float costPerPurchaseUofM,
-                       float previousUpdated, ProductClass aClass) {
+    public Product(String vendor, String vendorProductNum,
+                   String name, String purchaseUnitMeasure, float costPerPurchaseUofM) {
+
         this.vendor = vendor;
         this.vendorProductNum = vendorProductNum;
         this.name = name;
-        this.purchaseUnitMesure = purchaseUnitMesure;
+        this.purchaseUnitMeasure = purchaseUnitMeasure;
         this.costPerPurchaseUofM = costPerPurchaseUofM;
 
-        this.aClass = aClass;
     }
 
-    public ProductList() { }
+    public Product() { }
 
     public int getId() {
         return id;
@@ -75,12 +71,12 @@ public class ProductList {
         this.name = name;
     }
 
-    public String getPurchaseUnitMesure() {
-        return purchaseUnitMesure;
+    public String getPurchaseUnitMeasure() {
+        return purchaseUnitMeasure;
     }
 
-    public void setPurchaseUnitMesure(String purchaseUnitMesure) {
-        this.purchaseUnitMesure = purchaseUnitMesure;
+    public void setPurchaseUnitMeasure(String purchaseUnitMeasure) {
+        this.purchaseUnitMeasure = purchaseUnitMeasure;
     }
 
     public float getCostPerPurchaseUofM() {
@@ -92,12 +88,14 @@ public class ProductList {
     }
 
 
-    public ProductClass getaClass() {
-        return aClass;
+    public ProductClass getProductClass() {
+        return productClass;
     }
 
-    public void setaClass(ProductClass aClass) {
-        this.aClass = aClass;
+
+    public void setProductClass(ProductClass productClass) {
+        productClass.getProducts().add(this);
+        this.productClass = productClass;
     }
 }
 
