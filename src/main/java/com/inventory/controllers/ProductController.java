@@ -2,18 +2,18 @@ package com.inventory.controllers;
 
 
 import com.inventory.models.data.ProductClassDao;
-import com.inventory.models.data.ProductListDao;
+import com.inventory.models.data.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("productList")
-public class ProductListController {
+@RequestMapping("/product")
+public class ProductController {
 
     @Autowired
-    private ProductListDao productListDao;
+    private ProductDao productDao;
 
     @Autowired
     private ProductClassDao productClassDao;
@@ -21,12 +21,11 @@ public class ProductListController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("productList", productListDao.findAll());
+        model.addAttribute("product", productDao.findAll());
         model.addAttribute("title", "Product List");
 
-        return "productList/index";
+        return "product/index";
     }
-
 
 
 }
