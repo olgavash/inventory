@@ -3,13 +3,14 @@ package com.inventory.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int product_id;
 
     @NotNull
     private String vendor;
@@ -43,8 +44,8 @@ public class Product {
 
     public Product() { }
 
-    public int getId() {
-        return id;
+    public int getProduct_id() {
+        return product_id;
     }
 
     public String getVendor() {
@@ -92,9 +93,7 @@ public class Product {
         return productClass;
     }
 
-
     public void setProductClass(ProductClass productClass) {
-        productClass.getProducts().add(this);
         this.productClass = productClass;
     }
 }

@@ -1,50 +1,46 @@
 package com.inventory.models;
 
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class ProductClass {
+public class ProductClass  {
+
+//    MEAT ("Meat"),
+//    DAIRY ("Dairy"),
+//    PRODUCE ("Produce"),
+//    BAKERY ("Bakery"),
+//    GROCERY ("Grocery"),
+//    BEVERAGE ("Beverage"),
+//    PAPER ("Paper"),
+//    JANITORIAL ("Janitorial");
+
+    private final String name;
 
     @Id
     @GeneratedValue
-    private int id;
+    public int productClass_id;
 
-    @NotNull
-    private String name;
+    @OneToMany
+    @JoinColumn(name = "name")
+    private List<Product> products = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "class_id")
-    private Set<Product> products = new HashSet<>();
 
-    public ProductClass(@NotNull String name, Set<Product> products) {
-
+    ProductClass(String name) {
         this.name = name;
-        this.products = products;
     }
 
-    public int getId() {
-        return id;
+    public int getProductClass_id() {
+        return productClass_id;
+    }
+
+    public void setProductClass_id(int productClass_id) {
+        this.productClass_id = productClass_id;
     }
 
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    Set<Product> getProducts() {
-        return this.products;
-    }
-
-    public ProductClass() {
-    }
-
-
 }
 

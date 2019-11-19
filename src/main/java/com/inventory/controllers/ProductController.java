@@ -1,13 +1,21 @@
 package com.inventory.controllers;
 
 
+import com.inventory.models.Product;
+import com.inventory.models.ProductClass;
 import com.inventory.models.data.ProductClassDao;
 import com.inventory.models.data.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -36,14 +44,58 @@ public class ProductController {
         return "product/products";
     }
 
+
+    //TODO To add product I need to build an object to form data
+
+    private Product product = new Product();
     @RequestMapping(value="/addProduct", method = RequestMethod.GET)
     public String addProductForm(Model model) {
+        model.addAttribute("title", "Add Product");
+        model.addAttribute(new Product());
+        model.addAttribute("productClasses", productClassDao.findAll());
+
         return "product/addProduct";
     }
 
+
+    //TODO add and commit that object to the database
+    //TODO edit and delete
+
     @RequestMapping(value="/addProduct", method = RequestMethod.POST)
-    public String addProduct(Model model) {
+    public String addProduct(@ModelAttribute @Valid Product newProduct,
+                             Errors errors, @RequestParam String name, Model model) {
         // Method to handle post addProduct
-        return "product/products";
+
+        ProductClass productClass=productClassDao.findByName(name);
+        newProduct.setProductClass(productClass);
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Product");
+            return "product/addProduct";
+        }
+
+        productDao.save(newProduct);
+
+        return "product/products"; //+ product.getProduct_id();
     }
+
+    @RequestMapping(value = "/removeProduct", method = RequestMethod.GET)
+    public String removeProductForm(Model model) {
+        model.addAttribute("products", productDao.findAll());
+        model.addAttribute("title", "Remove Product");
+        return "product/remove";
+    }
+
+
+    @RequestMapping(value = "/removeProduct", method = RequestMethod.POST)
+    public String removeProduct(@RequestParam int[] productIds) {
+
+        for (int productId : productIds) {
+            productDao.deleteById(productId);
+        }
+
+        return "redirect:";
+    }
+
+
+
 }
