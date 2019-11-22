@@ -10,6 +10,56 @@
 
 Add Product Page
 
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<form method="post" style="max-width:600px;" th:object="${product}">
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+        <span th:errors="*{name}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="productClass">Product Class</label>
+        <select name="productClass_id">
+            <option th:each="productClass : ${productClasses}"
+                    th:text="${productClass.name}"
+                    th:value="${productClass.id}"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label th:for="vendor">Vendor</label>
+        <input class="form-control" th:field="*{vendor}" />
+        <span th:errors="*{vendor}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="vendorProductNum">Vendor Product Number</label>
+        <input class="form-control" th:field="*{vendorProductNum}" />
+        <span th:errors="*{vendorProductNum}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="purchaseUnitMeasure">Purchase Unit Measure</label>
+        <input class="form-control" th:field="*{purchaseUnitMeasure}" />
+        <span th:errors="*{purchaseUnitMeasure}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="costPerPurchaseUofM">Cost per Purchase U of M</label>
+        <input class="form-control" th:field="*{costPerPurchaseUofM}" />
+        <span th:errors="*{costPerPurchaseUofM}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Add Product" />
+</form>
+
+
+
+
 </body>
 
 </html>

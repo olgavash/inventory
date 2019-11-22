@@ -3,7 +3,7 @@ package com.inventory.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class Product {
@@ -29,7 +29,8 @@ public class Product {
     private float costPerPurchaseUofM;
 
     @ManyToOne
-    private ProductClass productClass;
+//    @JoinColumn (name="className", nullable=false)
+    private ArrayList<ProductClass> className;
 
     public Product(String vendor, String vendorProductNum,
                    String name, String purchaseUnitMeasure, float costPerPurchaseUofM) {
@@ -88,13 +89,16 @@ public class Product {
         this.costPerPurchaseUofM = costPerPurchaseUofM;
     }
 
-
-    public ProductClass getProductClass() {
-        return productClass;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public void setProductClass(ProductClass productClass) {
-        this.productClass = productClass;
+    public ArrayList<ProductClass> getClassName() {
+        return className;
+    }
+
+    public void setClassName(ArrayList<ProductClass> className) {
+        this.className = className;
     }
 }
 

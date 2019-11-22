@@ -7,28 +7,32 @@ import java.util.List;
 @Entity
 public class ProductClass  {
 
-//    MEAT ("Meat"),
-//    DAIRY ("Dairy"),
-//    PRODUCE ("Produce"),
-//    BAKERY ("Bakery"),
-//    GROCERY ("Grocery"),
-//    BEVERAGE ("Beverage"),
-//    PAPER ("Paper"),
-//    JANITORIAL ("Janitorial");
-
-    private final String name;
-
     @Id
     @GeneratedValue
     public int productClass_id;
+
+    private ArrayList<String>  className = new ArrayList<String>();
+    {
+        className.add("Meat");
+        className.add("Dairy");
+        className.add("Produce");
+        className.add("Bakery");
+        className.add("Grocery");
+        className.add("Beverage");
+        className.add("Paper");
+        className.add("Janitorial");
+    }
 
     @OneToMany
     @JoinColumn(name = "name")
     private List<Product> products = new ArrayList<>();
 
+    public ProductClass() {}
 
-    ProductClass(String name) {
-        this.name = name;
+    public ProductClass(int productClass_id, ArrayList<String> className, List<Product> products) {
+        this.productClass_id = productClass_id;
+        this.className = className;
+        this.products = products;
     }
 
     public int getProductClass_id() {
@@ -39,8 +43,20 @@ public class ProductClass  {
         this.productClass_id = productClass_id;
     }
 
-    public String getName() {
-        return name;
+    public ArrayList<String> getClassName() {
+        return className;
+    }
+
+    public void setClassName(ArrayList<String> className) {
+        this.className = className;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }
 

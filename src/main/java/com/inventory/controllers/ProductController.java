@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 public class ProductController {
@@ -51,8 +51,10 @@ public class ProductController {
     @RequestMapping(value="/addProduct", method = RequestMethod.GET)
     public String addProductForm(Model model) {
         model.addAttribute("title", "Add Product");
-        model.addAttribute(new Product());
-        model.addAttribute("productClasses", productClassDao.findAll());
+        Product product = new Product();
+        ArrayList<ProductClass> className = productClassDao.findAll();
+//        model.addAttribute(new Product());
+        model.addAttribute("productClasses", className);
 
         return "product/addProduct";
     }
@@ -63,14 +65,15 @@ public class ProductController {
 
     @RequestMapping(value="/addProduct", method = RequestMethod.POST)
     public String addProduct(@ModelAttribute @Valid Product newProduct,
-                             Errors errors, @RequestParam String name, Model model) {
+                             Errors errors, @RequestParam int productClass_id, Model model) {
         // Method to handle post addProduct
 
-        ProductClass productClass=productClassDao.findByName(name);
-        newProduct.setProductClass(productClass);
+        ArrayList<ProductClass> productClass=productClassDao.findAll();
+        newProduct.setClassName(productClass);
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Product");
-            return "product/addProduct";
+            System.out.println("Something went wrong");
+           return "product/addProduct";
         }
 
         productDao.save(newProduct);
