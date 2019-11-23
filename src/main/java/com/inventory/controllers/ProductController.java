@@ -52,7 +52,7 @@ public class ProductController {
     public String addProductForm(Model model) {
         model.addAttribute("title", "Add Product");
         Product product = new Product();
-        ArrayList<ProductClass> className = productClassDao.findAll();
+        ProductClass className = (ProductClass) productClassDao.findAll();
 //        model.addAttribute(new Product());
         model.addAttribute("productClasses", className);
 
@@ -68,8 +68,8 @@ public class ProductController {
                              Errors errors, @RequestParam int productClass_id, Model model) {
         // Method to handle post addProduct
 
-        ArrayList<ProductClass> productClass=productClassDao.findAll();
-        newProduct.setClassName(productClass);
+        ProductClass productClass= (ProductClass) productClassDao.findAll();
+        newProduct.setProductClass(productClass);
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Product");
             System.out.println("Something went wrong");

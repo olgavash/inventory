@@ -9,29 +9,28 @@ public class ProductClass  {
 
     @Id
     @GeneratedValue
-    public int productClass_id;
+    private int productClass_id;
 
-    private ArrayList<String>  className = new ArrayList<String>();
+    private ArrayList<String>  productClass = new ArrayList<String>();
     {
-        className.add("Meat");
-        className.add("Dairy");
-        className.add("Produce");
-        className.add("Bakery");
-        className.add("Grocery");
-        className.add("Beverage");
-        className.add("Paper");
-        className.add("Janitorial");
+        productClass.add("Meat");
+        productClass.add("Dairy");
+        productClass.add("Produce");
+        productClass.add("Bakery");
+        productClass.add("Grocery");
+        productClass.add("Beverage");
+        productClass.add("Paper");
+        productClass.add("Janitorial");
     }
 
-    @OneToMany
-    @JoinColumn(name = "name")
-    private List<Product> products = new ArrayList<>();
+    @OneToMany(mappedBy = "productClass", fetch = FetchType.LAZY)
+    private List<Product> products;
 
     public ProductClass() {}
 
-    public ProductClass(int productClass_id, ArrayList<String> className, List<Product> products) {
+    public ProductClass(int productClass_id, ArrayList<String> productClass, List<Product> products) {
         this.productClass_id = productClass_id;
-        this.className = className;
+        this.productClass = productClass;
         this.products = products;
     }
 
@@ -43,12 +42,12 @@ public class ProductClass  {
         this.productClass_id = productClass_id;
     }
 
-    public ArrayList<String> getClassName() {
-        return className;
+    public ArrayList<String> getProductClass() {
+        return productClass;
     }
 
-    public void setClassName(ArrayList<String> className) {
-        this.className = className;
+    public void setProductClass(ArrayList<String> productClass) {
+        this.productClass = productClass;
     }
 
     public List<Product> getProducts() {

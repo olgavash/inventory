@@ -3,7 +3,6 @@ package com.inventory.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 
 @Entity
 public class Product {
@@ -28,25 +27,33 @@ public class Product {
     @NotNull
     private float costPerPurchaseUofM;
 
-    @ManyToOne
-//    @JoinColumn (name="className", nullable=false)
-    private ArrayList<ProductClass> className;
 
-    public Product(String vendor, String vendorProductNum,
-                   String name, String purchaseUnitMeasure, float costPerPurchaseUofM) {
+    @ManyToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn (name="productClass_id")
+    private ProductClass productClass;
 
+    public Product() { }
+
+    public Product(int product_id, @NotNull String vendor, @NotNull String vendorProductNum,
+                   @NotNull @Size(min = 1, message = "Description must not be empty") String name,
+                   @NotNull String purchaseUnitMeasure, @NotNull float costPerPurchaseUofM,
+                   ProductClass productClass) {
+        this.product_id = product_id;
         this.vendor = vendor;
         this.vendorProductNum = vendorProductNum;
         this.name = name;
         this.purchaseUnitMeasure = purchaseUnitMeasure;
         this.costPerPurchaseUofM = costPerPurchaseUofM;
-
+        this.productClass = productClass;
     }
 
-    public Product() { }
 
     public int getProduct_id() {
         return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
     public String getVendor() {
@@ -89,16 +96,12 @@ public class Product {
         this.costPerPurchaseUofM = costPerPurchaseUofM;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public ProductClass getProductClass() {
+        return productClass;
     }
 
-    public ArrayList<ProductClass> getClassName() {
-        return className;
-    }
-
-    public void setClassName(ArrayList<ProductClass> className) {
-        this.className = className;
+    public void setProductClass(ProductClass productClass) {
+        this.productClass = productClass;
     }
 }
 

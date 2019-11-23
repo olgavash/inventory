@@ -1,16 +1,15 @@
 package com.inventory.models.data;
 
-import com.inventory.models.ProductClass;
+import com.inventory.models.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 
 @Repository
 @Transactional
-public interface ProductClassDao extends CrudRepository<ProductClass, Integer> {
+public interface ProductClassDao extends CrudRepository<Product, Integer> {
 
-    public ArrayList<ProductClass> findAll();
+    public Iterable<Product> findAll();
 
 }
