@@ -9,4 +9,6 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface CountSheetDao extends CrudRepository<CountSheet, Integer> {
+
+
 }

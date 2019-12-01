@@ -1,114 +1,73 @@
 package com.inventory.models;
 
-
+import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class CountSheet {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int countId;
 
-    @NotNull
-    private String vendor;
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date invDate = new Date();
 
-    @NotNull
-    private String vendorProductNum;
+//    private Date curDate;
 
-    @NotNull
-    @Size(min=1, message = "Description must not be empty")
-    private String name;
-
-    @NotNull
-    private String unitOfMesure;
-
-    private float previousCount;
-
-    private float count;
-
-    @ManyToOne
-    private ProductClass aClass;
+    private double count;
+    private int productId;
 
 
-    public CountSheet(String vendor, String vendorProductNum,
-                      String name, String unitOfMesure, float previousCount,
-                      float count) {
-        this.vendor = vendor;
-        this.vendorProductNum = vendorProductNum;
-        this.name = name;
-        this.unitOfMesure = unitOfMesure;
-        this.previousCount = previousCount;
-        this.count = count;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "productId", insertable = false, updatable = false)
+    private Product product;
 
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn (name="productClassId", insertable = false, updatable = false)
+//    private ProductClass productClass;
+
+
+    public int getCountId() {
+        return countId;
     }
 
-
-    public CountSheet() { }
-
-    public int getId() {
-        return id;
+    public void setCountId(int countId) {
+        this.countId = countId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Date getInvDate() {
+        return invDate;
     }
 
-    public String getVendor() {
-        return vendor;
+    public void setInvDate(Date invDate) {
+        this.invDate = invDate;
     }
 
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
-    }
-
-    public String getVendorProductNum() {
-        return vendorProductNum;
-    }
-
-    public void setVendorProductNum(String vendorProductNum) {
-        this.vendorProductNum = vendorProductNum;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUnitOfMesure() {
-        return unitOfMesure;
-    }
-
-    public void setUnitOfMesure(String unitOfMesure) {
-        this.unitOfMesure = unitOfMesure;
-    }
-
-    public float getPreviousCount() {
-        return previousCount;
-    }
-
-    public void setPreviousCount(float previousCount) {
-        this.previousCount = previousCount;
-    }
-
-    public float getCount() {
+    public double getCount() {
         return count;
     }
 
-    public void setCount(float count) {
+    public void setCount(double count) {
         this.count = count;
     }
 
-    public ProductClass getaClass() {
-        return aClass;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setaClass(ProductClass aClass) {
-        this.aClass = aClass;
+    public void setProduct(Product product) {
+        this.product = product;
     }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
 }

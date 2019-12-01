@@ -12,36 +12,32 @@
  |
 <a href="/countSheet">Update Count Sheet</a>
 
-
-<p th:unless="${products} and ${products.size()} ">no products :(</p>
-
-
-<table class="table">
-
+<br/><br/>
+<table border="1" cellpadding="10">
+    <thead>
     <tr>
         <th>Item #</th>
-        <th>Product
-            Class</th>
+        <th>Product Class</th>
+        <th>Product Name</th>
         <th>Vendor</th>
         <th>Vendor Product Number</th>
         <th>Purchase Unit Measure</th>
         <th>Cost per Purchase U of M</th>
-
-
     </tr>
+    </thead>
 
+    <tbody>
     <tr th:each="product : ${products}">
-        <td th:text="${product.id}"></td>
-        <td th:text="${product.productClass.getName()}"></td>
+        <td th:text="${product.productId}"></td>
+        <td th:text="${product.productClass.description}"></td>
         <td th:text="${product.name}"></td>
         <td th:text="${product.vendor}"></td>
         <td th:text="${product.vendorProductNum}"></td>
         <td th:text="${product.purchaseUnitMeasure}"></td>
         <td th:text="${product.costPerPurchaseUofM}"></td>
 
-
     </tr>
-
+    </tbody>
 </table>
 
 </body>

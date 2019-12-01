@@ -1,6 +1,7 @@
 package com.inventory.models.data;
 
 import com.inventory.models.Product;
+import com.inventory.models.ProductClass;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,8 +9,7 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface ProductClassDao extends CrudRepository<Product, Integer> {
+public interface ProductClassDao extends CrudRepository<ProductClass, Integer> {
 
-    public Iterable<Product> findAll();
 
 }

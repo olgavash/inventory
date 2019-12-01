@@ -9,7 +9,11 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private int product_id;
+    private int productId;
+
+    @NotNull
+    @Size(min=1, message = "Name must not be empty")
+    private String name;
 
     @NotNull
     private String vendor;
@@ -17,9 +21,6 @@ public class Product {
     @NotNull
     private String vendorProductNum;
 
-    @NotNull
-    @Size(min=1, message = "Description must not be empty")
-    private String name;
 
     @NotNull
     private String purchaseUnitMeasure;
@@ -28,32 +29,37 @@ public class Product {
     private float costPerPurchaseUofM;
 
 
-    @ManyToOne (cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn (name="productClass_id")
+//    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE,
+//            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+//    @JoinColumn (name="productClassId")
+    private int productClassId;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn (name="productClassId", insertable = false, updatable = false)
     private ProductClass productClass;
 
-    public Product() { }
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn (name="countId", insertable = false, updatable = false)
+//    private CountSheet countSheet;
 
-    public Product(int product_id, @NotNull String vendor, @NotNull String vendorProductNum,
-                   @NotNull @Size(min = 1, message = "Description must not be empty") String name,
-                   @NotNull String purchaseUnitMeasure, @NotNull float costPerPurchaseUofM,
-                   ProductClass productClass) {
-        this.product_id = product_id;
-        this.vendor = vendor;
-        this.vendorProductNum = vendorProductNum;
-        this.name = name;
-        this.purchaseUnitMeasure = purchaseUnitMeasure;
-        this.costPerPurchaseUofM = costPerPurchaseUofM;
-        this.productClass = productClass;
+//    public void proceedCountSheet(CountSheet countSheet) {
+//        this.countSheet = countSheet;
+//        countSheet.setProduct(this);
+//    }
+//    public void removeCountSheet() {
+//        if (countSheet != null) {
+//            countSheet.setProduct(null);
+//        }
+//        this.countSheet = null;
+//    }
+
+
+    public int getProductId() {
+        return productId;
     }
 
-
-    public int getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getVendor() {
@@ -96,6 +102,15 @@ public class Product {
         this.costPerPurchaseUofM = costPerPurchaseUofM;
     }
 
+    public int getProductClassId() {
+        return productClassId;
+    }
+
+    public void setProductClassId(int productClassId) {
+        this.productClassId = productClassId;
+    }
+
+
     public ProductClass getProductClass() {
         return productClass;
     }
@@ -103,5 +118,13 @@ public class Product {
     public void setProductClass(ProductClass productClass) {
         this.productClass = productClass;
     }
+
+//    public CountSheet getCountSheet() {
+//        return countSheet;
+//    }
+//
+//    public void setCountSheet(CountSheet countSheet) {
+//        this.countSheet = countSheet;
+//    }
 }
 

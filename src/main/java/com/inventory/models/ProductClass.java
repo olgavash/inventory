@@ -5,57 +5,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table (name = "ProductClass")
 public class ProductClass  {
 
     @Id
     @GeneratedValue
-    private int productClass_id;
+    private int productClassId;
 
-    private ArrayList<String>  productClass = new ArrayList<String>();
-    {
-        productClass.add("Meat");
-        productClass.add("Dairy");
-        productClass.add("Produce");
-        productClass.add("Bakery");
-        productClass.add("Grocery");
-        productClass.add("Beverage");
-        productClass.add("Paper");
-        productClass.add("Janitorial");
+    private String description;
+
+
+//    private ArrayList<String> productClass = new ArrayList<>();
+//    {
+//        productClass.add("Meat");
+//        productClass.add("Dairy");
+//        productClass.add("Produce");
+//        productClass.add("Bakery");
+//        productClass.add("Grocery");
+//        productClass.add("Beverage");
+//        productClass.add("Paper");
+//        productClass.add("Janitorial");
+//    }
+
+//    @OneToMany(mappedBy = "productClass", cascade = CascadeType.ALL)
+//    private List<Product> products;
+
+
+    public int getProductClassId() {
+        return productClassId;
     }
 
-    @OneToMany(mappedBy = "productClass", fetch = FetchType.LAZY)
-    private List<Product> products;
-
-    public ProductClass() {}
-
-    public ProductClass(int productClass_id, ArrayList<String> productClass, List<Product> products) {
-        this.productClass_id = productClass_id;
-        this.productClass = productClass;
-        this.products = products;
+    public void setProductClassId(int productClassId) {
+        this.productClassId = productClassId;
     }
 
-    public int getProductClass_id() {
-        return productClass_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProductClass_id(int productClass_id) {
-        this.productClass_id = productClass_id;
-    }
-
-    public ArrayList<String> getProductClass() {
-        return productClass;
-    }
-
-    public void setProductClass(ArrayList<String> productClass) {
-        this.productClass = productClass;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 
