@@ -27,6 +27,9 @@ public class ProductController {
     @Autowired
     private ProductClassDao productClassDao;
 
+    public ProductController() {
+    }
+
     @RequestMapping("/")
     public String index(Model model) {
 

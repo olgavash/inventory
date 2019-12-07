@@ -115,7 +115,7 @@ public class Product {
         return productClass;
     }
 
-    public void setProductClass(ProductClass productClass) {
+    public void setProductClass(com.inventory.models.ProductClass productClass) {
         this.productClass = productClass;
     }
 

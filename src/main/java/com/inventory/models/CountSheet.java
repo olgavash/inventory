@@ -1,8 +1,14 @@
 package com.inventory.models;
 
+import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
 import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Entity
 public class CountSheet {
@@ -10,20 +16,27 @@ public class CountSheet {
     @Id
     @GeneratedValue
     private int countId;
+    private static final String DATEFORMAT = "MM/dd/yyyy";
+//    @CreatedDate
+//    @Temporal(TemporalType.TIMESTAMP)
+    private Date invDate;
 
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date invDate = new Date();
-
-//    private Date curDate;
-
+    @Min(0)
+    @Max(1000)
     private double count;
+    @NotNull
+
     private int productId;
 
+    public static String getCurrentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
+        return sdf.format(new Date(System.currentTimeMillis()));
+    }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "productId", insertable = false, updatable = false)
     private Product product;
+
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn (name="productClassId", insertable = false, updatable = false)
@@ -69,5 +82,9 @@ public class CountSheet {
     public void setProductId(int productId) {
         this.productId = productId;
     }
+
+//    public void addProduct(Product product) {
+//        this.products.add(product);
+//    }
 
 }

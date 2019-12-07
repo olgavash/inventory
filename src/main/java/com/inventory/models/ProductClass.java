@@ -15,17 +15,6 @@ public class ProductClass  {
     private String description;
 
 
-//    private ArrayList<String> productClass = new ArrayList<>();
-//    {
-//        productClass.add("Meat");
-//        productClass.add("Dairy");
-//        productClass.add("Produce");
-//        productClass.add("Bakery");
-//        productClass.add("Grocery");
-//        productClass.add("Beverage");
-//        productClass.add("Paper");
-//        productClass.add("Janitorial");
-//    }
 
 //    @OneToMany(mappedBy = "productClass", cascade = CascadeType.ALL)
 //    private List<Product> products;
