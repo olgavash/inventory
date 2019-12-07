@@ -3,6 +3,7 @@ package com.inventory.dto;
 
 import com.inventory.models.CountSheet;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class CountSheetListDto {
@@ -16,7 +17,9 @@ public class CountSheetListDto {
     public CountSheetListDto(ArrayList<CountSheet> counts) {
         this.counts = counts;
     }
-
+//    for (CountSheet item : counts) {
+//        item.setInvDate(new Date(System.currentTimeMillis()));
+//    }
     public ArrayList<CountSheet> getCounts() {
         return counts;
     }
@@ -33,4 +36,5 @@ public class CountSheetListDto {
         int size = counts.size();
         return size;
     }
+
 }

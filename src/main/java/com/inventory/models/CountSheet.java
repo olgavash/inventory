@@ -83,7 +83,15 @@ public class CountSheet {
         this.productId = productId;
     }
 
-//    public void addProduct(Product product) {
+//    public ProductClass getProductClass() {
+//        return productClass;
+//    }
+//
+//    public void setProductClass(ProductClass productClass) {
+//        this.productClass = productClass;
+//    }
+
+    //    public void addProduct(Product product) {
 //        this.products.add(product);
 //    }
 
