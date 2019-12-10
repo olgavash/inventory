@@ -29,7 +29,6 @@ public class Product {
     @NotNull
     private float costPerPurchaseUofM;
 
-
 //    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE,
 //            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 //    @JoinColumn (name="productClassId")
@@ -98,7 +97,6 @@ public class Product {
     public void setProductClassId(int productClassId) {
         this.productClassId = productClassId;
     }
-
 
     public ProductClass getProductClass() {
         return productClass;

@@ -70,13 +70,13 @@ public class CountSheet {
         this.count = count;
     }
 
-//    public Product getProduct() {
-//        return product;
-//    }
-//
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public int getProductId() {
         return productId;
@@ -86,26 +86,7 @@ public class CountSheet {
         this.productId = productId;
     }
 
-//    public ProductClass getProductClass() {
-//        return productClass;
-//    }
-//
-//    public void setProductClass(ProductClass productClass) {
-//        this.productClass = productClass;
-//    }
 
-    //    public void addProduct(Product product) {
-//        this.products.add(product);
-//    }
-
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 }
 
 
