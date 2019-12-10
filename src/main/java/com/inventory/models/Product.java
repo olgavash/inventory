@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -38,21 +39,9 @@ public class Product {
     @JoinColumn (name="productClassId", insertable = false, updatable = false)
     private ProductClass productClass;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn (name="countId", insertable = false, updatable = false)
-//    private CountSheet countSheet;
-
-//    public void proceedCountSheet(CountSheet countSheet) {
-//        this.countSheet = countSheet;
-//        countSheet.setProduct(this);
-//    }
-//    public void removeCountSheet() {
-//        if (countSheet != null) {
-//            countSheet.setProduct(null);
-//        }
-//        this.countSheet = null;
-//    }
-
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn (name="countId", insertable = false, updatable = false)
+    private CountSheet countSheet;
 
     public int getProductId() {
         return productId;
@@ -119,12 +108,12 @@ public class Product {
         this.productClass = productClass;
     }
 
-//    public CountSheet getCountSheet() {
-//        return countSheet;
-//    }
-//
-//    public void setCountSheet(CountSheet countSheet) {
-//        this.countSheet = countSheet;
-//    }
+    public CountSheet getCountSheet() {
+        return countSheet;
+    }
+
+    public void setCountSheet(CountSheet countSheet) {
+        this.countSheet = countSheet;
+    }
 }
 

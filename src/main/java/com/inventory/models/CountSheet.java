@@ -6,8 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +29,7 @@ public class CountSheet {
     private double count;
     @NotNull
 
-    private int productId;
+
 
     public static String getCurrentDate(){
         SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
@@ -36,7 +39,7 @@ public class CountSheet {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "productId", insertable = false, updatable = false)
     private Product product;
-
+    private int productId;
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn (name="productClassId", insertable = false, updatable = false)
@@ -67,13 +70,13 @@ public class CountSheet {
         this.count = count;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProduct(Product product) {
+//        this.product = product;
+//    }
 
     public int getProductId() {
         return productId;
@@ -95,4 +98,15 @@ public class CountSheet {
 //        this.products.add(product);
 //    }
 
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
+
+
+

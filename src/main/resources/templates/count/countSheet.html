@@ -6,7 +6,7 @@
 </head>
 <body>
     <div align="center">
-    <form method="post" action="/countSheet" id="myForm" th:action="@{/products/save}" th:object="${form}" >
+    <form method="post" action="/countSheet"  th:object="${countSheetList}" >
         <table border="0" cellpadding="10">
             <tr>
                 <th>Product Id</th>
@@ -32,8 +32,6 @@
         <input type="submit" value="Save Count Sheet" />
 
     </form>
-<script language="JavaScript">
-
-</script>
+</div>
 </body>
 </html>

@@ -1,9 +1,9 @@
 package com.inventory.controllers;
 
+import com.inventory.dto.CountSheetDto;
+import com.inventory.dto.ProductDto;
 import com.inventory.models.CountSheet;
-import com.inventory.dto.CountSheetListDto;
 import com.inventory.models.Product;
-import com.inventory.models.ProductClass;
 import com.inventory.models.data.CountSheetDao;
 import com.inventory.models.data.ProductClassDao;
 import com.inventory.models.data.ProductDao;
@@ -14,8 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class CountSheetController {
@@ -31,6 +33,13 @@ public class CountSheetController {
     private CountSheetDao countSheetDao;
 
 
+    private static final String DATEFORMAT = "MM/dd/yyyy";
+
+    public static String getCurrentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
+        return sdf.format(new java.sql.Date(System.currentTimeMillis()));
+    }
+
 
 //    @RequestMapping(value="/countSheet", method = RequestMethod.GET)
 //    public @ModelAttribute("countSheetListDto")
@@ -41,9 +50,32 @@ public class CountSheetController {
 
 //    @GetMapping("/countSheet")
 
+
+//    public List<ProductDto> countSheetForm(List<Product> products) {
+//        List<ProductDto> productDtoList = null;
+////        List<CountSheetDto> countSheetList = null;
+//        if (products != null && !products.isEmpty()) {
+//            productDtoList = new ArrayList<ProductDto>();
+//            ProductDto productDto = null;
+//            for (Product product : products) {
+//                productDto = new ProductDto();
+//                productDto.setProductId(product.getProductId());
+//                productDto.setName(product.getName());
+//                CountSheetDto countDto = new CountSheetDto();
+//                countDto.setInvDate(countDto.getInvDate());
+//                countDto.setCountId(countDto.getCountId());
+//                countDto.setCount(countDto.getCount());
+//                productDtoList.add(productDto);
+//            }
+//        }
+//        return productDtoList;
+//    }
+
+
+
     @RequestMapping(value="/countSheet", method = RequestMethod.GET)
-//    public String countSheetForm(Model model) {
-//        CountSheetListDto countSheetForm = new CountSheetListDto();
+//    public List<ProductDto> countSheetForm(Model model) {
+//        CountSheetDto countSheetForm = new CountSheetDto();
 //        int size = countSheetForm.size();
 //        for (int i = 1; i <= size ; i++) {
 //            countSheetForm.addCount(new CountSheet());
@@ -66,22 +98,27 @@ public class CountSheetController {
         return "count/countSheet";
     }
 
-    @RequestMapping(value="/countSheet", method = RequestMethod.POST)
-    public String proceedCountSheet(@ModelAttribute @Valid CountSheetListDto form,
-            BindingResult bindingResult, Model model) {
 
-//        for (CountSheet item : countSheetList) {
-//            item.setInvDate(new Date(System.currentTimeMillis()));
-//        }
-////        System.out.println("List size " + countSheetList.size());
+
+
+    @RequestMapping(value="/countSheet", method = RequestMethod.POST)
+    public String proceedCountSheet(@ModelAttribute @Valid ArrayList<CountSheet> countSheetList,
+                                    BindingResult bindingResult, Model model) {
+
+
+        for (CountSheet item : countSheetList) {
+            item.setInvDate((java.sql.Date) new Date(System.currentTimeMillis()));
+        }
+
+//        System.out.println("List size " + countSheetList.size());
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "Save Count Sheet");
             System.out.println("Something went wrong");
-            return "count/countSheet";
+            return "product/addProduct";
         }
 
-        countSheetDao.saveAll(form.getCounts());
+        countSheetDao.saveAll(countSheetList);
         return "redirect:/countSheet";
     }
 
