@@ -6,7 +6,7 @@
 </head>
 <body>
     <div align="center">
-    <form method="post" action="/countSheet"  th:object="${countSheet}" >
+    <form method="post" ModelAttribute="countSheet" action="/countSheet"  th:object="${countSheet}" >
         <table border="0" cellpadding="10">
             <tr>
                 <th>Product Id</th>
@@ -18,7 +18,7 @@
                 <td th:text="${product.productId}"></td>
                 <td th:text="${product.name}"></td>
                 <td th:text="${currentDate}"></td>
-                <td><input type="text" name="${count}"/>
+                <td><input type="text" name='count'/>
 
                     <!--                <td><input type="text" th:name='|countSheet[${itemStat.index}].count|'/>-->
 <!--                    <input type="hidden" th:name='|countSheet[${itemStat.index}].productId|'-->

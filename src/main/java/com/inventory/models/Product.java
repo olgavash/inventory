@@ -3,6 +3,8 @@ package com.inventory.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -38,9 +40,9 @@ public class Product {
     @JoinColumn (name="productClassId", insertable = false, updatable = false)
     private ProductClass productClass;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn (name="countId", insertable = false, updatable = false)
-//    private CountSheet countSheet;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn (name="countId", insertable = false, updatable = false)
+    private List<CountSheet> counts = new ArrayList<>();
 
     public int getProductId() {
         return productId;
@@ -106,12 +108,12 @@ public class Product {
         this.productClass = productClass;
     }
 
-//    public CountSheet getCountSheet() {
-//        return countSheet;
-//    }
-//
-//    public void setCountSheet(CountSheet countSheet) {
-//        this.countSheet = countSheet;
-//    }
+    public List<CountSheet> getCounts() {
+        return counts;
+    }
+
+    public void setCounts(List<CountSheet> counts) {
+        this.counts = counts;
+    }
 }
 

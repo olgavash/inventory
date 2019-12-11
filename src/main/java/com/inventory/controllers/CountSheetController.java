@@ -34,7 +34,8 @@ public class CountSheetController {
     @RequestMapping(value="/countSheet", method = RequestMethod.GET)
     public String countSheetForm(Model model) {
         model.addAttribute("title", "Count Sheet");
-        model.addAttribute("countSheetList");
+//      model.addAttribute("countSheetList");
+        model.addAttribute("countSheet", new CountSheet());
         Iterable<Product> products = productDao.findAll();
         model.addAttribute("products", products);
         model.addAttribute("currentDate", CountSheet.getCurrentDate());
@@ -43,31 +44,28 @@ public class CountSheetController {
     }
 
 
-    @RequestMapping(value="/countSheet", method = RequestMethod.POST)
-    public String proceedCountSheet(@ModelAttribute @Valid double count,
-                                    BindingResult bindingResult, Model model) {
+    @RequestMapping(value="count/countSheet", method = RequestMethod.POST)
+    public String proceedCountSheet(@ModelAttribute @Valid CountSheet newCountSheet,
+                                    BindingResult bindingResult,
+                                    @RequestParam int[] productIds, Model model)    {
 
-        System.out.println("Stop");
 
-        CountSheet countSheet = new CountSheet();
-        countSheet.setCount(count);
-        System.out.println("Stop");
+        Iterable<Product> products = productDao.findAll();
+        for (int productId : productIds) {
+            newCountSheet.setCount(productId);
+            newCountSheet.setInvDate(new Date(System.currentTimeMillis()));
 
-//        for (CountSheet item : countSheetList) {
-//            item.setInvDate((java.sql.Date) new Date(System.currentTimeMillis()));
-//        }
+        }
+        countSheetDao.save(newCountSheet);
+
+
+//        System.out.println("Stop");
 //
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("title", "Save Count Sheet");
-//            System.out.println("Something went wrong");
-//            return "product/addProduct";
-//        }
-//        ArrayList<CountSheet> countSheetList
-
-        System.out.println("Stop");
-
-//        countSheetDao.save(count);
-        System.out.println("Stop");
+//        System.out.println("Stop");
+//
+//        System.out.println("Stop");
+//
+//        System.out.println("Stop");
         return "redirect:/countSheet";
     }
 
