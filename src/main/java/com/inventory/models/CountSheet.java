@@ -3,6 +3,7 @@ package com.inventory.models;
 import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
 import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -27,8 +28,11 @@ public class CountSheet {
     @Min(0)
     @Max(1000)
     private double count;
-    @NotNull
 
+    public CountSheet() {
+    }
+
+    @NotNull
 
 
     public static String getCurrentDate(){
@@ -46,6 +50,10 @@ public class CountSheet {
 //    private ProductClass productClass;
 
 
+    public CountSheet(@Min(0) @Max(1000) double count) {
+        this.count = count;
+    }
+
     public int getCountId() {
         return countId;
     }
@@ -62,8 +70,8 @@ public class CountSheet {
         this.invDate = invDate;
     }
 
-    public double getCount() {
-        return count;
+    public double getCount(@Valid double count) {
+        return this.count;
     }
 
     public void setCount(double count) {

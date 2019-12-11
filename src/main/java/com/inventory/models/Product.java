@@ -38,9 +38,9 @@ public class Product {
     @JoinColumn (name="productClassId", insertable = false, updatable = false)
     private ProductClass productClass;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn (name="countId", insertable = false, updatable = false)
-    private CountSheet countSheet;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn (name="countId", insertable = false, updatable = false)
+//    private CountSheet countSheet;
 
     public int getProductId() {
         return productId;
@@ -106,12 +106,12 @@ public class Product {
         this.productClass = productClass;
     }
 
-    public CountSheet getCountSheet() {
-        return countSheet;
-    }
-
-    public void setCountSheet(CountSheet countSheet) {
-        this.countSheet = countSheet;
-    }
+//    public CountSheet getCountSheet() {
+//        return countSheet;
+//    }
+//
+//    public void setCountSheet(CountSheet countSheet) {
+//        this.countSheet = countSheet;
+//    }
 }
 

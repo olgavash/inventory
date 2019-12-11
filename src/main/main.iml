@@ -17,5 +17,7 @@
     <orderEntry type="library" name="Gradle: org.hibernate:hibernate-core:5.4.6.Final" level="project" />
     <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy:1.10.1" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-core:5.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:2.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot:2.2.0.RELEASE" level="project" />
   </component>
 </module>
