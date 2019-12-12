@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class CountSheetController {
+public class CountSheetController<newCountSheet> {
 
 
     @Autowired
@@ -47,15 +47,12 @@ public class CountSheetController {
     @RequestMapping(value="count/countSheet", method = RequestMethod.POST)
     public String proceedCountSheet(@ModelAttribute @Valid CountSheet newCountSheet,
                                     BindingResult bindingResult,
-                                    @RequestParam int[] productIds, Model model)    {
+                                    @RequestParam int productId, Model model)    {
 
-
+        model.addAttribute("countSheet", new CountSheet());
         Iterable<Product> products = productDao.findAll();
-        for (int productId : productIds) {
-            newCountSheet.setCount(productId);
-            newCountSheet.setInvDate(new Date(System.currentTimeMillis()));
-
-        }
+        newCountSheet.setCount(productId);
+        newCountSheet.setInvDate(new Date(System.currentTimeMillis()));
         countSheetDao.save(newCountSheet);
 
 
