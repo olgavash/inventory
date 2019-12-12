@@ -37,7 +37,7 @@ public class CountSheetController {
 
     public static String getCurrentDate(){
         SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
-        return sdf.format(new java.sql.Date(System.currentTimeMillis()));
+        return sdf.format(new Date(System.currentTimeMillis()));
     }
 
 
@@ -107,7 +107,7 @@ public class CountSheetController {
 
 
         for (CountSheet item : countSheetList) {
-            item.setInvDate((java.sql.Date) new Date(System.currentTimeMillis()));
+            item.setInvDate(new Date(System.currentTimeMillis()));
         }
 
 //        System.out.println("List size " + countSheetList.size());
