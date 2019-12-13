@@ -85,15 +85,26 @@ public class CountSheetController {
 //        return "count/countSheet";
 //    }
     public String countSheetForm(Model model) {
+        List<CountSheet> countSheetList = new ArrayList<>();
+        for(Product item: productDao.findAll()){
+            CountSheet countshet = new CountSheet();
+            countshet.setCount(0);
+            countshet.setCountId(item.getProductId());
+            countshet.setProductId(item.getProductId());
+            countshet.setInvDate(null);
+            countshet.setProduct(item);
+            countSheetList.add(countshet);
+        }
         model.addAttribute("title", "Count Sheet");
         model.addAttribute("countSheetList");
         Iterable<Product> products = productDao.findAll();
         model.addAttribute("products", products);
+        model.addAttribute("countSheets", countSheetList);
         model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
 //        Iterable<ProductClass> productClassList = productClassDao.findAll();
 //        model.addAttribute("productClass", productClassList);
-
+        System.out.println(countSheetList.toString());
 
         return "count/countSheet";
     }
@@ -117,8 +128,10 @@ public class CountSheetController {
             System.out.println("Something went wrong");
             return "product/addProduct";
         }
-
-        countSheetDao.saveAll(countSheetList);
+        for(CountSheet item: countSheetList){
+            countSheetDao.save(item);
+        }
+//        countSheetDao.saveAll(countSheetList);
         return "redirect:/countSheet";
     }
 

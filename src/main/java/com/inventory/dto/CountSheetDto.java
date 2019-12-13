@@ -44,8 +44,7 @@ public class CountSheetDto implements Serializable {
 //        int size = counts.size();
 //        return size;
 //    }
-    @Id
-    @GeneratedValue
+
     private int countId;
     private int productId;
 //    private List<Product> products;
