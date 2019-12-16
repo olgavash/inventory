@@ -27,7 +27,7 @@ public class CountSheet {
     @Min(0)
     @Max(1000)
     private double count;
-    @NotNull
+    //@NotNull
 
 
 

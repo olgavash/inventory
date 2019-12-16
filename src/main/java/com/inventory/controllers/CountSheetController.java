@@ -87,9 +87,9 @@ public class CountSheetController {
     public String countSheetForm(Model model) {
         List<CountSheet> countSheetList = new ArrayList<>();
         for(Product item: productDao.findAll()){
-            CountSheet countshet = new CountSheet();
+            CountSheet countshet = new CountSheet(); //TODO: think about what to do if you have multiple counts! Array should be created somewhere
             countshet.setCount(0);
-            countshet.setCountId(item.getProductId());
+            countshet.setCountId(item.getProductId()); //TODO: ID of each count does not have to be equial Product ID!!! Fix it.
             countshet.setProductId(item.getProductId());
             countshet.setInvDate(null);
             countshet.setProduct(item);
@@ -105,6 +105,7 @@ public class CountSheetController {
 //        Iterable<ProductClass> productClassList = productClassDao.findAll();
 //        model.addAttribute("productClass", productClassList);
         System.out.println(countSheetList.toString());
+        countSheetDao.saveAll(countSheetList);
 
         return "count/countSheet";
     }
