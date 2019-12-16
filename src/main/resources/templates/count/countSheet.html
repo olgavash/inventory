@@ -46,7 +46,7 @@
                 <td th:text="${countSheet.productId}"></td>
                 <td th:text="${countSheet.getProduct().name}"></td>
                 <td th:text="${countSheet.getInvDate()}"></td>
-                <td><input type="text" th:value="${countSheet.getCount()}"/>
+                <td><input type="text" name="${countSheet.getCount()}"/>
                     <!--TODO how to name NAME in form where we have loop????-->
                 </td>
 

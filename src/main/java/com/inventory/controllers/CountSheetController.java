@@ -88,8 +88,8 @@ public class CountSheetController {
         List<CountSheet> countSheetList = new ArrayList<>();
         for(Product item: productDao.findAll()){
             CountSheet countshet = new CountSheet(); //TODO: think about what to do if you have multiple counts! Array should be created somewhere
-            countshet.setCount(0);
-            countshet.setCountId(item.getProductId()); //TODO: ID of each count does not have to be equial Product ID!!! Fix it.
+            countshet.setCount(5);
+            countshet.setCountId(countshet.getCountId()); //TODO: ID of each count does not have to be equial Product ID!!! Fix it.
             countshet.setProductId(item.getProductId());
             countshet.setInvDate(null);
             countshet.setProduct(item);
@@ -112,7 +112,6 @@ public class CountSheetController {
 
 
 
-
     @RequestMapping(value="/countSheet", method = RequestMethod.POST)
     public String proceedCountSheet(@ModelAttribute @Valid ArrayList<CountSheet> countSheetList,
                                     BindingResult bindingResult, Model model) {
@@ -129,7 +128,9 @@ public class CountSheetController {
             System.out.println("Something went wrong");
             return "product/addProduct";
         }
+        System.out.println("stop");
         for(CountSheet item: countSheetList){
+
             countSheetDao.save(item);
         }
 //        countSheetDao.saveAll(countSheetList);
