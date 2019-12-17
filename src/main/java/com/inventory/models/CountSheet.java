@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 public class CountSheet {
 
+
     @Id
     @GeneratedValue
     private int countId;
@@ -24,13 +25,11 @@ public class CountSheet {
 //    @Temporal(TemporalType.TIMESTAMP)
     private Date invDate;
 
-    @Min(0)
-    @Max(1000)
+//    @Min(0)
+//    @Max(1000)
     private double count;
-    @NotNull
 
-
-
+//    @NotNull
     public static String getCurrentDate(){
         SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
         return sdf.format(new Date(System.currentTimeMillis()));

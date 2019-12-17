@@ -74,21 +74,11 @@ public class CountSheetController {
 
 
     @RequestMapping(value="/countSheet", method = RequestMethod.GET)
-//    public List<ProductDto> countSheetForm(Model model) {
-//        CountSheetDto countSheetForm = new CountSheetDto();
-//        int size = countSheetForm.size();
-//        for (int i = 1; i <= size ; i++) {
-//            countSheetForm.addCount(new CountSheet());
-//        }
-//
-//        model.addAttribute("form", countSheetForm);
-//        return "count/countSheet";
-//    }
     public String countSheetForm(Model model) {
         List<CountSheet> countSheetList = new ArrayList<>();
         for(Product item: productDao.findAll()){
             CountSheet countshet = new CountSheet();
-            countshet.setCount(0);
+            countshet.setCount(-11);
             countshet.setCountId(item.getProductId());
             countshet.setProductId(item.getProductId());
             countshet.setInvDate(null);
@@ -102,9 +92,8 @@ public class CountSheetController {
         model.addAttribute("countSheets", countSheetList);
         model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
-//        Iterable<ProductClass> productClassList = productClassDao.findAll();
-//        model.addAttribute("productClass", productClassList);
         System.out.println(countSheetList.toString());
+        countSheetDao.saveAll(countSheetList);
 
         return "count/countSheet";
     }
@@ -112,16 +101,69 @@ public class CountSheetController {
 
 
 
-    @RequestMapping(value="/countSheet", method = RequestMethod.POST)
-    public String proceedCountSheet(@ModelAttribute @Valid ArrayList<CountSheet> countSheetList,
+//    @RequestMapping(value="/countSheet", method = RequestMethod.POST)
+//    public String proceedCountSheet(@ModelAttribute @Valid ArrayList<CountSheet> countSheetList,
+//                                    BindingResult bindingResult, Model model) {
+//
+//
+//        for (CountSheet item : countSheetList) {
+//            item.setInvDate(new Date(System.currentTimeMillis()));
+//        }
+//
+////        System.out.println("List size " + countSheetList.size());
+//
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("title", "Save Count Sheet");
+//            System.out.println("Something went wrong");
+//            return "product/addProduct";
+//        }
+//        for(CountSheet item: countSheetList){
+////            if(countSheetForm(count)!=null) {
+//                countSheetDao.save(item);
+//        }
+//
+//        System.out.println("stop");
+////        countSheetDao.saveAll(countSheetList);
+//        return "redirect:/countSheet";
+//    }
+
+    @GetMapping("/countSheet/formreturn")
+    public String proceedCountSheet(@ModelAttribute @Valid ArrayList<CountSheet> countSheetList, @RequestParam String countInput,
                                     BindingResult bindingResult, Model model) {
+        System.out.println("stop");
+        System.out.println(countInput);
+
+        //convert countInput in array and after convert Strings into Integers
+
+        String[] countInputArrayString;
+        countInputArrayString = countInput.split(",");
+        Integer [] countInputArrayInt = new Integer[countInputArrayString.length];
+        for( int i=0; i<countInputArrayString.length; i++) {
+            String item = countInputArrayString[i];
+            int itemInt = Integer.parseInt(item);
+            countInputArrayInt[i] = itemInt;
+        }
+
+        //now we have to pull all data for the "form submitted" html
+
+        List<Product> productSheetList = new ArrayList<>();
+        for(Product item: productDao.findAll()){
+            productSheetList.add(item);
+        }
+
+        List<CountSheet> countSheetList1 = new ArrayList<>();
+        for(CountSheet item: countSheetDao.findAll()){
+            countSheetList1.add(item);
+        }
+
+        //assign values taken from th to countSheetList1 (count==0 AND product.productID==CountSheet.productID)
 
 
         for (CountSheet item : countSheetList) {
             item.setInvDate(new Date(System.currentTimeMillis()));
         }
 
-//        System.out.println("List size " + countSheetList.size());
+
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "Save Count Sheet");
@@ -129,9 +171,12 @@ public class CountSheetController {
             return "product/addProduct";
         }
         for(CountSheet item: countSheetList){
+//            if(countSheetForm(count)!=null) {
             countSheetDao.save(item);
         }
-//        countSheetDao.saveAll(countSheetList);
+
+        System.out.println("stop");
+
         return "redirect:/countSheet";
     }
 

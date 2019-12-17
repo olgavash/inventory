@@ -6,34 +6,57 @@
 </head>
 <body>
     <div align="center">
-    <form method="post" action="/countSheet" id="myForm" th:action="@{/products/save}" th:object="${form}" >
-        <table border="0" cellpadding="10">
-            <tr>
-                <th>Product Id</th>
-                <th>Name</th>
-                <th>Inventory Date</th>
-                <th>Count</th>
-            </tr>
-            <tr th:each="product, itemStat : ${products}">
-                <td th:text="${product.productId}"></td>
-                <td th:text="${product.name}"></td>
-                <td th:text="${currentDate}"></td>
-                <td><input type="text" th:name='|countSheet[${itemStat.index}].count|'/>
-                    <input type="hidden" th:name='|countSheet[${itemStat.index}].productId|'
-                    th:value="${product.productId}"/>
-<!--                <td><input th:field="*{products[__${itemStat.index}__].count}" />-->
+<!--    <form method="post" action="/countSheet"  th:object="${countSheetList}" >-->
+<!--        <table border="0" cellpadding="10">-->
+<!--            <tr>-->
+<!--                <th>Product Id</th>-->
+<!--                <th>Name</th>-->
+<!--                <th>Inventory Date</th>-->
+<!--                <th>Count</th>-->
+<!--            </tr>-->
+<!--            <tr th:each="product, itemStat : ${products}">-->
+<!--                <td th:text="${product.productId}"></td>-->
+<!--                <td th:text="${product.name}"></td>-->
+<!--                <td th:text="${currentDate}"></td>-->
+<!--                <td><input type="text" th:name='|countSheet[${itemStat.index}].count|'/>-->
 <!--                    <input type="hidden" th:name='|countSheet[${itemStat.index}].productId|'-->
-<!--                           th:value="${product.productId}"/>-->
-                </td>
+<!--                    th:value="${product.productId}"/>-->
+<!--&lt;!&ndash;                <td><input th:field="*{products[__${itemStat.index}__].count}" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="hidden" th:name='|countSheet[${itemStat.index}].productId|'&ndash;&gt;-->
+<!--&lt;!&ndash;                           th:value="${product.productId}"/>&ndash;&gt;-->
+<!--                </td>-->
 
-            </tr>
+<!--            </tr>-->
+<!--        </table>-->
+<!--        <br/>-->
+<!--        <input type="submit" value="Save Count Sheet" />-->
+
+<!--    </form>-->
+<!--    th:object="${countSheetList}"-->
+
+    <form method="get" action="/countSheet/formreturn"  >
+        <table border="0" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Name</th>
+                    <th>Inventory Date</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="countSheet : ${countSheets}">
+                    <td th:text="${countSheet.productId}"></td>
+                    <td th:text="${countSheet.getProduct().name}"></td>
+                    <td th:text="${countSheet.getInvDate()}"></td>
+                    <td> <input type="text" name="countInput"/></td>
+                </tr>
+            </tbody>
+            <input type="submit" value="Save Count Sheet" />
         </table>
         <br/>
-        <input type="submit" value="Save Count Sheet" />
 
     </form>
-<script language="JavaScript">
-
-</script>
+</div>
 </body>
 </html>

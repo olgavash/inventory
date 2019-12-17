@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+    <h1 align="center" th:text="${title}">Count Sheet</h1>
+</head>
+<body>
+    <div align="center">
+
+        <form method="post" action="/countSheet"  th:object="${countSheetList}" >
+            <table border="0" cellpadding="10">
+                <tr>
+                    <th>Product Id</th>
+                    <th>Name</th>
+                    <th>Inventory Date</th>
+                    <th>Count</th>
+                </tr>
+                <tr th:each="product, itemStat : ${products}">
+                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${currentDate}"></td>
+                    <td><input type="text" th:name='|countSheet[${itemStat.index}].count|'/>
+                        <input type="hidden" th:name='|countSheet[${itemStat.index}].productId|'
+                                                                th:value="${product.productId}"/>
+    <!--                <td><input th:field="*{products[__${itemStat.index}__].count}" />-->
+    <!--                    <input type="hidden" th:name='|countSheet[${itemStat.index}].productId|'-->
+    <!--                           th:value="${product.productId}"/>-->
+                    </td>
+
+                </tr>
+            </table>
+            <br/>
+            <input type="submit" value="Save Count Sheet" />
+
+        </form>
+
+    </div>
+</body>
+</html>

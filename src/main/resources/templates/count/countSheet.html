@@ -34,25 +34,27 @@
 <!--    </form>-->
 <!--    th:object="${countSheetList}"-->
 
-    <form method="post" action="/countSheet"  >
+    <form method="get" action="/countSheet/formreturn"  >
         <table border="0" cellpadding="10">
-            <tr>
-                <th>Product Id</th>
-                <th>Name</th>
-                <th>Inventory Date</th>
-                <th>Count</th>
-            </tr>
-            <tr th:each="countSheet : ${countSheets}">
-                <td th:text="${countSheet.productId}"></td>
-                <td th:text="${countSheet.getProduct().name}"></td>
-                <td th:text="${countSheet.getInvDate()}"></td>
-                <td><input type="text" th:value="${countSheet.getCount()}"/>
-                </td>
-
-            </tr>
+            <thead>
+                <tr>
+                    <th>Product Id</th>
+                    <th>Name</th>
+                    <th>Inventory Date</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="countSheet : ${countSheets}">
+                    <td th:text="${countSheet.productId}"></td>
+                    <td th:text="${countSheet.getProduct().name}"></td>
+                    <td th:text="${countSheet.getInvDate()}"></td>
+                    <td> <input type="text" name="countInput"/></td>
+                </tr>
+            </tbody>
+            <input type="submit" value="Save Count Sheet" />
         </table>
         <br/>
-        <input type="submit" value="Save Count Sheet" />
 
     </form>
 </div>
