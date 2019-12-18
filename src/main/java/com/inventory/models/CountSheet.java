@@ -1,17 +1,8 @@
 package com.inventory.models;
 
-import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
-import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class CountSheet {
@@ -65,8 +56,9 @@ public class CountSheet {
         return count;
     }
 
-    public void setCount(double count) {
+    public double setCount(double count) {
         this.count = count;
+        return count;
     }
 
 //    public Product getProduct() {
@@ -105,6 +97,8 @@ public class CountSheet {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+
 }
 
 

@@ -78,7 +78,7 @@ public class CountSheetController {
         List<CountSheet> countSheetList = new ArrayList<>();
         for(Product item: productDao.findAll()){
             CountSheet countshet = new CountSheet();
-            countshet.setCount(-11);
+            countshet.setCount(-11.00);
             countshet.setCountId(item.getProductId());
             countshet.setProductId(item.getProductId());
             countshet.setInvDate(null);
@@ -146,32 +146,32 @@ public class CountSheetController {
 
         //now we have to pull all data for the "form submitted" html
 
-        List<Product> productSheetList = new ArrayList<>();
-        for(Product item: productDao.findAll()){
-            productSheetList.add(item);
-        }
+//        List<Product> productSheetList = new ArrayList<>();
+//        for(Product item: productDao.findAll()){
+//            productSheetList.add(item);
+//        }
 
         List<CountSheet> countSheetList1 = new ArrayList<>();
         for(CountSheet item: countSheetDao.findAll()){
-            countSheetList1.add(item);
+           if(item.getCount()==-11.00) {
+               countSheetList1.add(item);
+           }
+           for (int i=0; i<countSheetList1.size(); i++){
+               countSheetList1.get(i).setCount(countInputArrayInt[i]);
+
+           }
         }
 
-        //assign values taken from th to countSheetList1 (count==0 AND product.productID==CountSheet.productID)
-
-
-        for (CountSheet item : countSheetList) {
+        for (CountSheet item : countSheetList1) {
             item.setInvDate(new Date(System.currentTimeMillis()));
         }
-
-
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "Save Count Sheet");
             System.out.println("Something went wrong");
             return "product/addProduct";
         }
-        for(CountSheet item: countSheetList){
-//            if(countSheetForm(count)!=null) {
+        for(CountSheet item: countSheetList1){
             countSheetDao.save(item);
         }
 
