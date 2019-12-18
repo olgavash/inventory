@@ -56,9 +56,9 @@ public class CountSheet {
         return count;
     }
 
-    public double setCount(double count) {
+    public void setCount(double count) {
         this.count = count;
-        return count;
+//        return count;
     }
 
 //    public Product getProduct() {

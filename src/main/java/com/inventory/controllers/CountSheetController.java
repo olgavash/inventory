@@ -152,15 +152,22 @@ public class CountSheetController {
 //        }
 
         List<CountSheet> countSheetList1 = new ArrayList<>();
+
         for(CountSheet item: countSheetDao.findAll()){
            if(item.getCount()==-11.00) {
                countSheetList1.add(item);
            }
-           for (int i=0; i<countSheetList1.size(); i++){
-               countSheetList1.get(i).setCount(countInputArrayInt[i]);
 
-           }
         }
+
+        System.out.println("stop");
+
+        for (int i=0; i<countSheetList1.size(); i++){
+            countSheetList1.get(i).setCount(countInputArrayInt[i]);
+
+        }
+
+        System.out.println("stop");
 
         for (CountSheet item : countSheetList1) {
             item.setInvDate(new Date(System.currentTimeMillis()));
