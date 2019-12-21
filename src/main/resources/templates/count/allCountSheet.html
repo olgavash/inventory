@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+    <h1 align="center" th:text="${title}">Current Inventory</h1>
+</head>
+<body>
+    <div align="center">
+    <a href="/">Home</a>
+    |
+    <a href="/product">Product list</a>
+
+    <form method="get" action="/countSheet/formreturn"  >
+        <table border="0" cellpadding="10">
+            <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Name</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                if invDate=currentDate
+
+                <td th:text="${countSheet.productId}"></td>
+                <td th:text="${countSheet.getProduct().name}"></td>
+                <td th:text="${countSheet.getCount}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <input type="submit" value="Save Count Sheet" />
+        <br/>
+
+    </form>
+</div>
+</body>
+</html>

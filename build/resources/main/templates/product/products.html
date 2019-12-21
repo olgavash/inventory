@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments::head">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+    <h1 align="center" th:text="${title}">Products</h1>
 </head>
 <body>
 
-
-
-<h1 th:text="${title}">Default Title</h1>
-
+<a href="/">Home</a>
+|
 <a href="/addProduct">Add Product</a>
- |
+|
+<a href="/removeProduct">Remove Product</a>
+|
 <a href="/countSheet">Update Count Sheet</a>
+|
+<a href="/allCountSheet">Show Current Inventory</a>
+
 
 <br/><br/>
 <table border="1" cellpadding="10">

@@ -1,7 +1,5 @@
 package com.inventory.controllers;
 
-import com.inventory.dto.CountSheetDto;
-import com.inventory.dto.ProductDto;
 import com.inventory.models.CountSheet;
 import com.inventory.models.Product;
 import com.inventory.models.data.CountSheetDao;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +48,7 @@ public class CountSheetController {
             countshet.setCount(-11.00);
             countshet.setCountId(item.getProductId());
             countshet.setProductId(item.getProductId());
-            countshet.setInvDate(null);
+            countshet.setInvDate(new Date());
             countshet.setProduct(item);
             countSheetList.add(countshet);
         }
@@ -128,6 +127,18 @@ public class CountSheetController {
         System.out.println("stop");
 
         return "redirect:/countSheet";
+    }
+
+
+    @RequestMapping(value = "/allCountSheet", method = RequestMethod.GET)
+    public String viewCurrentInventory(Model model) {
+
+        model.addAttribute("product", productDao.findAll());
+        model.addAttribute("title", "Cafeteria Inventory");
+        model.addAttribute("countSheets", countSheetDao.findAll());
+        model.addAttribute("currentDate", CountSheet.getCurrentDate());
+
+        return "count/allCuntSheet";
     }
 
 

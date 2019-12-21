@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head >
+    <h1 align="center" th:text="${title}">Count Sheet</h1>
+</head>
+<body>
+    <div align="center">
+    <form method="post">
+
+        <div th:each="product : ${products}" class="checkbox">
+            <input type="checkbox" name="productIds" th:value="${product.id}" th:id="${product.id}"/>
+            <label th:for="${product.id}" th:text="${product.name}"></label>
+            <br />
+        </div>
+
+        <input type="submit" value="Remove Cheese" />
+    </form>
+
+
+
+</div>
+</body>
+</html>
