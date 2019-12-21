@@ -63,9 +63,6 @@ public class ProductController {
     }
 
 
-    //TODO add and commit that object to the database
-    //TODO edit and delete
-
     @RequestMapping(value="/addProduct", method = RequestMethod.POST)
     public String addProduct(@ModelAttribute @Valid Product newProduct,
                              BindingResult bindingResult, @RequestParam int productClassId, Model model) {
