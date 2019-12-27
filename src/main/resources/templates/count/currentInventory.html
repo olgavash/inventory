@@ -8,30 +8,28 @@
     <div align="center">
     <a href="/">Home</a>
     |
-    <a href="/product">Product list</a>
+    <a href="/product">Current Inventory</a>
 
-    <form method="get" action="/countSheet/formreturn"  >
+    <form method="get" action="/currentInventory"  >
         <table border="0" cellpadding="10">
             <thead>
             <tr>
-                <th>Product Id</th>
+                <th>Product Number</th>
                 <th>Name</th>
+                <th>Inventory Date</th>
                 <th>Count</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product : ${products}">
-                if invDate=currentDate
+            <tr th:each="countSheet : ${allCurrentCountSheets}">
 
                 <td th:text="${countSheet.productId}"></td>
                 <td th:text="${countSheet.getProduct().name}"></td>
-                <td th:text="${countSheet.getCount}"></td>
+                <td th:text="${countSheet.getInvDate()}"></td>
+                <td th:text="${countSheet.getCount()}"></td>
             </tr>
             </tbody>
         </table>
-
-        <input type="submit" value="Save Count Sheet" />
-        <br/>
 
     </form>
 </div>

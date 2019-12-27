@@ -40,6 +40,7 @@ public class CountSheetController {
     }
 
 
+
     @RequestMapping(value="/countSheet", method = RequestMethod.GET)
     public String countSheetForm(Model model) {
         List<CountSheet> countSheetList = new ArrayList<>();
@@ -102,14 +103,10 @@ public class CountSheetController {
 
         }
 
-        System.out.println("stop");
-
         for (int i=0; i<countSheetList.size(); i++){
             countSheetList.get(i).setCount(countInputArrayInt[i]);
 
         }
-
-        System.out.println("stop");
 
         for (CountSheet item : countSheetList) {
             item.setInvDate(new Date(System.currentTimeMillis()));
@@ -124,21 +121,19 @@ public class CountSheetController {
             countSheetDao.save(item);
         }
 
-        System.out.println("stop");
-
         return "redirect:/countSheet";
     }
 
 
-    @RequestMapping(value = "/allCountSheet", method = RequestMethod.GET)
+    @RequestMapping(value = "/currentInventory", method = RequestMethod.GET)
     public String viewCurrentInventory(Model model) {
 
         model.addAttribute("product", productDao.findAll());
-        model.addAttribute("title", "Cafeteria Inventory");
-        model.addAttribute("countSheets", countSheetDao.findAll());
+        model.addAttribute("title", "Current Inventory");
+        model.addAttribute("allCurrentCountSheets", countSheetDao.findAllByOrderByInvDateDesc());
         model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
-        return "count/allCuntSheet";
+        return "count/currentInventory";
     }
 
 
