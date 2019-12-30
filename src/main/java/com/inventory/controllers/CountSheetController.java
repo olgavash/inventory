@@ -81,10 +81,6 @@ public class CountSheetController {
         }
         model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
-        System.out.println(countSheetList.toString());
-//        countSheetDao.saveAll(countSheetList);
-
-
         //convert countInput in array and after convert Strings into Integers
 
         String[] countInputArrayString;
@@ -121,7 +117,7 @@ public class CountSheetController {
             countSheetDao.save(item);
         }
 
-        return "redirect:/countSheet";
+        return "redirect:/currentInventory";
     }
 
 

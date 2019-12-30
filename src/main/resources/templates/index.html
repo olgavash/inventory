@@ -10,9 +10,29 @@
     <a href="/product">Product list</a> |
     <a href="/countSheet">Update Count Sheet</a>
 
-    <br/>
-    <br/>
-</div>
+   </div>
+    <form method="get" action="/currentInventory"  >
+        <table border="0" cellpadding="10">
+            <thead>
+            <tr>
+                <th>Product Number</th>
+                <th>Name</th>
+                <th>Inventory Date</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="countSheet : ${allCurrentCountSheets}">
+
+                <td th:text="${countSheet.productId}"></td>
+                <td th:text="${countSheet.getProduct().getName()}"></td>
+                <td th:text="${countSheet.getInvDate()}"></td>
+                <td th:text="${countSheet.getCount()}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </form>
 </div>
 </body>
 </html>

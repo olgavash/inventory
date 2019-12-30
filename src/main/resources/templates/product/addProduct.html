@@ -6,6 +6,10 @@
 </head>
 <body>
     <div align="center">
+    <a href="/">Home</a>
+    |
+    <a href="/product">Product list</a>
+
     <form method="post" th:object="${product}">
     <table border="0" cellpadding="10">
         <tr>
@@ -17,11 +21,11 @@
         <tr>
             <td>Product Class</td>
             <td><select name="productClassId">
-            <option th:each="productClass : ${productClass}"
+            <option th:each="productClass : ${productClassList}"
                     th:text="${productClass.description}"
                     th:value="${productClass.productClassId}"></option>
             </select></td>
-            <span th:errors="*{productClassId}" class="error"></span>
+            <span th:errors="*{productClass}" class="error"></span>
         </tr>
 
         <tr>

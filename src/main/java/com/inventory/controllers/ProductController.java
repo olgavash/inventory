@@ -1,8 +1,10 @@
 package com.inventory.controllers;
 
 
+import com.inventory.models.CountSheet;
 import com.inventory.models.Product;
 import com.inventory.models.ProductClass;
+import com.inventory.models.data.CountSheetDao;
 import com.inventory.models.data.ProductClassDao;
 import com.inventory.models.data.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -27,14 +30,20 @@ public class ProductController {
     @Autowired
     private ProductClassDao productClassDao;
 
+    @Autowired
+    private CountSheetDao countSheetDao;
+
+
     public ProductController() {
     }
 
     @RequestMapping("/")
     public String index(Model model) {
 
-        model.addAttribute("product", productDao.findAll());
         model.addAttribute("title", "Cafeteria Inventory");
+        model.addAttribute("product", productDao.findAll());
+        model.addAttribute("allCurrentCountSheets", countSheetDao.findAllByOrderByInvDateDesc());
+        model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
         return "index";
     }
@@ -42,22 +51,18 @@ public class ProductController {
     @RequestMapping("/product")
     public String showProducts(Model model) {
 
+        model.addAttribute("title", "All Products");
         List<Product> products = (List<Product>) productDao.findAll();
         model.addAttribute("products", products);
-
         return "product/products";
     }
 
 
-//    private Product product = new Product();
     @RequestMapping(value="/addProduct", method = RequestMethod.GET)
     public String addProductForm(Model model) {
         model.addAttribute("title", "Add Product");
         model.addAttribute(new Product());
-
-        Iterable<ProductClass> productClassList = productClassDao.findAll();
-
-        model.addAttribute("productClass", productClassList);
+        model.addAttribute("productClassList", productClassDao.findAll());
 
         return "product/addProduct";
     }
@@ -67,8 +72,9 @@ public class ProductController {
     public String addProduct(@ModelAttribute @Valid Product newProduct,
                              BindingResult bindingResult, @RequestParam int productClassId, Model model) {
         // Method to handle post addProduct
-
-        newProduct.setProductClassId(productClassId);
+        model.addAttribute("productClassList", productClassDao.findAll());
+        ProductClass prcl = productClassDao.findOne(productClassId);
+        newProduct.setProductClass(prcl);
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("title", "Add Product");
@@ -89,20 +95,16 @@ public class ProductController {
 
 
     @RequestMapping(value = "/removeProduct", method = RequestMethod.POST)
-    public String removeProduct(@RequestParam int[] productIds) {
+    public String removeProduct(@RequestParam (required = false) int[] productIds) {
 
-        for (int productId : productIds) {
-            productDao.deleteById(productId);
+        if (productIds != null) {
+            for (int productId : productIds) {
+                productDao.deleteById(productId);
+            }
         }
 
-        return "redirect:";
+        return "redirect:/product";
     }
 
-//    @RequestMapping(value = "/admin/productInventory/editProduct/{id}")
-//    public String editProduct(@PathVariable String id, Model model) {
-//        Product product = productDao.getProductById(id);
-//        model.addAttribute(product);
-//        return "editProduct";
-//    }
 
 }

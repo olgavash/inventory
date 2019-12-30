@@ -3,6 +3,7 @@ package com.inventory.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -21,7 +22,6 @@ public class Product {
     @NotNull
     private String vendorProductNum;
 
-
     @NotNull
     private String purchaseUnitMeasure;
 
@@ -32,15 +32,17 @@ public class Product {
 //    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE,
 //            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
 //    @JoinColumn (name="productClassId")
-    private int productClassId;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn (name="productClassId", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_class_id")
     private ProductClass productClass;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn (name="countId", insertable = false, updatable = false)
-    private CountSheet countSheet;
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn (name="productClassId", insertable = false, updatable = false)
+//    private ProductClass productClass;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,  mappedBy = "countId")
+    private List<CountSheet> countSheets;
 
     public int getProductId() {
         return productId;
@@ -90,29 +92,20 @@ public class Product {
         this.costPerPurchaseUofM = costPerPurchaseUofM;
     }
 
-    public int getProductClassId() {
-        return productClassId;
-    }
-
-    public void setProductClassId(int productClassId) {
-        this.productClassId = productClassId;
-    }
-
-
     public ProductClass getProductClass() {
         return productClass;
     }
 
-    public void setProductClass(com.inventory.models.ProductClass productClass) {
+    public void setProductClass(ProductClass productClass) {
         this.productClass = productClass;
     }
 
-    public CountSheet getCountSheet() {
-        return countSheet;
+    public List<CountSheet> getCountSheets() {
+        return countSheets;
     }
 
-    public void setCountSheet(CountSheet countSheet) {
-        this.countSheet = countSheet;
+    public void setCountSheets(List<CountSheet> countSheets) {
+        this.countSheets = countSheets;
     }
 }
 

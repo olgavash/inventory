@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head >
-    <h1 align="center" th:text="${title}">Count Sheet</h1>
+    <h1 align="center" th:text="${title}">Default Title</h1>
 </head>
 <body>
     <div align="center">
@@ -23,7 +23,7 @@
             <tbody>
                 <tr th:each="countSheet : ${countSheets}">
                     <td th:text="${countSheet.productId}"></td>
-                    <td th:text="${countSheet.getProduct().name}"></td>
+                    <td th:text="${countSheet.getProduct().getName()}"></td>
                     <td th:text="${currentDate}"></td>
                     <td> <input type="text" name="countInput"/></td>
                 </tr>

@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface ProductClassDao extends CrudRepository<ProductClass, Integer> {
-
+    default ProductClass findOne(Integer productClassId) {
+        return (ProductClass) findById(productClassId).orElse(null);
+    }
 
 }

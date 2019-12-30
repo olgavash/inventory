@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head >
-    <h1 align="center" th:text="${title}">Count Sheet</h1>
+<head>
+    <h1 align="center" th:text="${title}">Default Title</h1>
 </head>
 <body>
     <div align="center">
     <form method="post">
+        <table border="0" cellpadding="10">
+            <thead>
+            <tr>
+                <th>Product Number</th>
+                <th>Name</th>
+                <th>Mark a product</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}" class="checkbox">
+                <td th:text="${product.productId}"></td>
+                <td><label th:for="${product.productId}" th:text="${product.name}"></label></td>
+                <td><input type="checkbox" name="productIds" th:value="${product.productId}" th:id="${product.productId}"/></td>
+            </tr>
+            </tbody>
+        </table>
 
-        <div th:each="product : ${products}" class="checkbox">
-            <input type="checkbox" name="productIds" th:value="${product.id}" th:id="${product.id}"/>
-            <label th:for="${product.id}" th:text="${product.name}"></label>
-            <br />
-        </div>
+        <input type="submit" value="Delete Selected Products" />
+        <br/>
 
-        <input type="submit" value="Remove Cheese" />
     </form>
-
-
-
 </div>
 </body>
 </html>

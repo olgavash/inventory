@@ -12,29 +12,18 @@ public class CountSheet {
     @GeneratedValue
     private int countId;
     private static final String DATEFORMAT = "MM/dd/yyyy";
-//    @CreatedDate
-//    @Temporal(TemporalType.TIMESTAMP)
     private Date invDate;
-
-//    @Min(0)
-//    @Max(1000)
     private double count;
 
-//    @NotNull
     public static String getCurrentDate(){
         SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
         return sdf.format(new Date(System.currentTimeMillis()));
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId", insertable = false, updatable = false)
     private Product product;
     private int productId;
-
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn (name="productClassId", insertable = false, updatable = false)
-//    private ProductClass productClass;
-
 
     public int getCountId() {
         return countId;

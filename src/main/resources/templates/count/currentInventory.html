@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head >
-    <h1 align="center" th:text="${title}">Current Inventory</h1>
+    <h1 align="center" th:text="${title}">Default Title</h1>
 </head>
 <body>
     <div align="center">
     <a href="/">Home</a>
     |
-    <a href="/product">Current Inventory</a>
+    <a href="/product">Product List</a>
 
     <form method="get" action="/currentInventory"  >
         <table border="0" cellpadding="10">
@@ -24,7 +24,7 @@
             <tr th:each="countSheet : ${allCurrentCountSheets}">
 
                 <td th:text="${countSheet.productId}"></td>
-                <td th:text="${countSheet.getProduct().name}"></td>
+                <td th:text="${countSheet.getProduct().getName()}"></td>
                 <td th:text="${countSheet.getInvDate()}"></td>
                 <td th:text="${countSheet.getCount()}"></td>
             </tr>

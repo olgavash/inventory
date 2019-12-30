@@ -11,14 +11,16 @@ public class ProductClass  {
     @Id
     @GeneratedValue
     private int productClassId;
-
     private String description;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productClass")
+    private List<Product> products;
 
+    public ProductClass() {}
 
-//    @OneToMany(mappedBy = "productClass", cascade = CascadeType.ALL)
-//    private List<Product> products;
-
+    public ProductClass(String description) {
+        this.description = description;
+    }
 
     public int getProductClassId() {
         return productClassId;
@@ -35,5 +37,13 @@ public class ProductClass  {
     public void setDescription(String description) {
         this.description = description;
     }
+
+//    public List<Product> getProducts() {
+//        return products;
+//    }
+//
+//    public void setProducts(List<Product> products) {
+//        this.products = products;
+//    }
 }
 
