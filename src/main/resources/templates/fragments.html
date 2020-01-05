@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}"></title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+
+<h1 th:fragment="h1"
+    align="center" th:text="${title}">Default Title</h1>
+
+<body>
+    <nav th:fragment="navigation">
+        <div align="center">
+            <a class="btn btn-outline-primary" href="/" role="button">Home</a>  <b></b>
+            <a class="btn btn-outline-primary" href="/product" role="button">Product list</a>  <b></b>
+            <a class="btn btn-outline-primary" href="/addProduct" role="button">Add Product</a>  <b></b>
+            <a class="btn btn-outline-primary" href="/removeProduct" role="button">Remove Product</a>  <b></b>
+            <a class="btn btn-outline-primary" href="/countSheet" role="button">Update Count Sheet</a>
+            <a class="btn btn-outline-primary" href="/currentInventory" role="button">Show Current Inventory</a>
+         </div>
+    </nav>
 </body>
 </html>

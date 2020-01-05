@@ -3,5 +3,12 @@ body {
 }
 
 nav {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
+    margin-left: 20px;
 }
+
+div {
+    margin-bottom: 35px;
+    margin-top: 20px;
+    margin-left: 20px;
+ }

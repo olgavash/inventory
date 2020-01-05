@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+
+<h1 th:replace="fragments::h1">Current Inventory</h1>
 
 <body class="container">
-<div align="center">
-<h1 th:text="${title}">Cafeteria Inventory</h1>
-
-    <div align="center">
-
-    <a href="/product">Product list</a> |
-    <a href="/countSheet">Update Count Sheet</a>
-
-   </div>
-    <form method="get" action="/currentInventory"  >
-        <table border="0" cellpadding="10">
-            <thead>
-            <tr>
-                <th>Product Number</th>
-                <th>Name</th>
-                <th>Inventory Date</th>
-                <th>Count</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="countSheet : ${allCurrentCountSheets}">
-
-                <td th:text="${countSheet.productId}"></td>
-                <td th:text="${countSheet.getProduct().getName()}"></td>
-                <td th:text="${countSheet.getInvDate()}"></td>
-                <td th:text="${countSheet.getCount()}"></td>
-            </tr>
-            </tbody>
-        </table>
-
-    </form>
+<div align="center" >
+    <a class="btn btn-outline-primary" href="/product" role="button">Product list</a>  <b></b>
+    <a class="btn btn-outline-primary" href="/countSheet" role="button">Update Count Sheet</a>
 </div>
+
+
+<div align="center">
+     <form method="get" action="/currentInventory"  >
+            <table class="table table-striped" border="0" cellpadding="10">
+                <thead>
+                <tr>
+                    <th>Product Number</th>
+                    <th>Name</th>
+                    <th>Inventory Date</th>
+                    <th>Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="countSheet : ${allCurrentCountSheets}">
+
+                    <td th:text="${countSheet.productId}"></td>
+                    <td th:text="${countSheet.getProduct().getName()}"></td>
+                    <td th:text="${countSheet.getInvDate()}"></td>
+                    <td th:text="${countSheet.getCount()}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </div>
 </body>
 </html>

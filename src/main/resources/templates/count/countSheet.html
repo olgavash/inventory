@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head >
-    <h1 align="center" th:text="${title}">Default Title</h1>
+<head th:replace="fragments::head">
 </head>
-<body>
+<h1 th:replace="fragments::h1"></h1>
+<body  class="container">
+    <div align="center" >
+        <a class="btn btn-outline-primary" href="/" role="button">Home</a>  <b></b>
+        <a class="btn btn-outline-primary" href="/product" role="button">Product list</a>  <b></b>
+    </div>
     <div align="center">
-    <a href="/">Home</a>
-    |
-    <a href="/product">Product list</a>
-
     <form method="get" action="/countSheet/formreturn"  >
         <table border="0" cellpadding="10">
             <thead>
@@ -30,7 +30,7 @@
             </tbody>
         </table>
 
-        <input type="submit" value="Save Count Sheet" />
+        <input type="submit" value="Save Count Sheet" class="btn btn-success"/>
         <br/>
 
     </form>

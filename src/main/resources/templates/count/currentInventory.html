@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head >
-    <h1 align="center" th:text="${title}">Default Title</h1>
+<head th:replace="fragments::head">
 </head>
-<body>
-    <div align="center">
-    <a href="/">Home</a>
-    |
-    <a href="/product">Product List</a>
+<h1 th:replace="fragments::h1"></h1>
 
+
+<body>
+<div align="center">
+    <a class="btn btn-outline-primary" href="/" role="button">Home</a>  <b></b>
+    <a class="btn btn-outline-primary" href="/product" role="button">Product list</a>  <b></b>
+</div>
+
+<div align="center">
     <form method="get" action="/currentInventory"  >
-        <table border="0" cellpadding="10">
+        <table class="table table-striped" border="0" cellpadding="10">
             <thead>
-            <tr>
-                <th>Product Number</th>
-                <th>Name</th>
-                <th>Inventory Date</th>
-                <th>Count</th>
-            </tr>
+                <tr>
+                    <th>Product Number</th>
+                    <th>Name</th>
+                    <th>Inventory Date</th>
+                    <th>Count</th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="countSheet : ${allCurrentCountSheets}">
+                <tr th:each="countSheet : ${allCurrentCountSheets}">
 
-                <td th:text="${countSheet.productId}"></td>
-                <td th:text="${countSheet.getProduct().getName()}"></td>
-                <td th:text="${countSheet.getInvDate()}"></td>
-                <td th:text="${countSheet.getCount()}"></td>
-            </tr>
+                    <td th:text="${countSheet.productId}"></td>
+                    <td th:text="${countSheet.getProduct().getName()}"></td>
+                    <td th:text="${countSheet.getInvDate()}"></td>
+                    <td th:text="${countSheet.getCount()}"></td>
+                </tr>
             </tbody>
         </table>
 

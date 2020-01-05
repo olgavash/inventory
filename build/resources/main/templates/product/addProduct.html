@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head >
-    <h1 align="center" th:text="${title}">Add Product</h1>
+<head th:replace="fragments::head">
 </head>
+<h1 th:replace="fragments::h1"></h1>
 <body>
     <div align="center">
-    <a href="/">Home</a>
-    |
-    <a href="/product">Product list</a>
+    <a class="btn btn-outline-primary" href="/" role="button">Home</a>  <b></b>
+    <a class="btn btn-outline-primary" href="/product" role="button">Product list</a>  <b></b>
+    </div>
 
+    <div align="center">
     <form method="post" th:object="${product}">
     <table border="0" cellpadding="10">
         <tr>
@@ -54,10 +55,10 @@
         </tr>
     </table>
         <br/>
-    <input type="submit" value="Add Product" />
+    <input type="submit" value="Add Product" class="btn btn-success" />
 
-</form>
-</div>
+    </form>
+    </div>
 
 </body>
 
