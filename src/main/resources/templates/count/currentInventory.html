@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments::head">
 </head>
+
 <h1 th:replace="fragments::h1"></h1>
 
-
-<body>
+<body class="container">
 <div align="center">
     <a class="btn btn-outline-primary" href="/" role="button">Home</a>  <b></b>
     <a class="btn btn-outline-primary" href="/product" role="button">Product list</a>  <b></b>
 </div>
+
 
 <div align="center">
     <form method="get" action="/currentInventory"  >

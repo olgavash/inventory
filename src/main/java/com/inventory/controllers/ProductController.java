@@ -41,12 +41,20 @@ public class ProductController {
     public String index(Model model) {
 
         model.addAttribute("title", "Cafeteria Inventory");
-        model.addAttribute("product", productDao.findAll());
-        model.addAttribute("allCurrentCountSheets", countSheetDao.findAllByOrderByInvDateDesc());
-        model.addAttribute("currentDate", CountSheet.getCurrentDate());
+//        model.addAttribute("product", productDao.findAll());
+//        model.addAttribute("allCurrentCountSheets", countSheetDao.findAllByOrderByInvDateDesc());
+//        model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
         return "index";
     }
+
+    @RequestMapping("/hello")
+    public String hello(Model model) {
+
+        model.addAttribute("title", "Cafeteria Inventory");
+        return "hello";
+    }
+
 
     @RequestMapping("/product")
     public String showProducts(Model model) {
