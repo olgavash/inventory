@@ -1,0 +1,4 @@
+applications:
+- name: inventory
+  buildpack: java_buildpack
+  path: build/libs/inventory-0.0.1-SNAPSHOT.jar
