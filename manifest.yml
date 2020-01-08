@@ -1,0 +1,4 @@
+applications:
+- name: inventory
+  buildpack: java_buildpack
+  path: inventory\out\artifacts\inventory_jar\inventory.jar
