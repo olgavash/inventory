@@ -60,7 +60,7 @@ public class CountSheetController {
         model.addAttribute("countSheets", countSheetList);
         model.addAttribute("currentDate", CountSheet.getCurrentDate());
 
-        System.out.println(countSheetList.toString());
+//        System.out.println(countSheetList.toString());
 //        countSheetDao.saveAll(countSheetList);
 
         return "count/countSheet";
